@@ -1,25 +1,29 @@
-import logo from './logo.svg';
+// import APICall from './services/sw-api';
+// import { getAllStarships } from './services/sw-api';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  
+  const [ship, setShip] = useState("")
+
+  const getShip = () => {
+    axios.get("https://swapi.dev/api/starships/").then((response)=> {
+      console.log(response)
+      setShip(response.data.results[0].name)
+    })
+  }
+
+  return(
+    <div>
+      Hello Youtube <button onClick={getShip}>
+    Get Starships</button> 
+    {ship}
+    
     </div>
-  );
+
+    )
 }
 
 export default App;
