@@ -6,50 +6,36 @@ import './App.css';
 
 function App() {
 
-  const [ship, setShip] = useState("sh")
+  const [ship, setShip] = useState("")
 
-
+  useEffect( () => {
+    getShip()
+  }, [])
 
   const getShip = () => {
     axios.get("https://swapi.dev/api/starships/").then((response) => {
       console.log(response.data.results)
       setShip(response.data.results.map((data, key) => {
         return (
-          <div className="contact" key={key}>
-
-
+          <div className="ships" key={key}>
             <h2>   {data.name} </h2>
-
-
-
           </div>
-
         )
       })
-
       )
     })
-
-
-
   }
-
 
 
 
   return (
     <div>
-      Hello Youtube <button
-        onClick={getShip}>
-        Get Starships</button>
+      <nav><h1>STAR WARS STARSHIPS</h1></nav>
 
-      <div>{ship}
-
+      <div>
+        {ship}
       </div>
-
-
     </div>
-
   )
 }
 
